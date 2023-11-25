@@ -21,7 +21,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 /**
  * Graphical {@link DrawNumberView} implementation.
  */
-public final class DrawNumberSwingView implements DrawNumberView {
+public final class DrawNumberSwingViewImpl implements DrawNumberView {
 
     private static final String FRAME_NAME = "Draw Number App";
     private static final String QUIT = "Quit";
@@ -35,7 +35,7 @@ public final class DrawNumberSwingView implements DrawNumberView {
     /**
      * Builds a new Swing-based interactive view.
      */
-    public DrawNumberSwingView() {
+    public DrawNumberSwingViewImpl() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(new JPanel(new BorderLayout()));
         final JPanel pNorth = new JPanel(new FlowLayout());

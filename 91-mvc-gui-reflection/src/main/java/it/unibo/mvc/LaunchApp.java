@@ -3,8 +3,10 @@ package it.unibo.mvc;
 import it.unibo.mvc.api.DrawNumberController;
 import it.unibo.mvc.controller.DrawNumberControllerImpl;
 import it.unibo.mvc.model.DrawNumberImpl;
-import it.unibo.mvc.view.DrawNumberSwingView;
-import it.unibo.mvc.view.DrawNumberViewImpl;
+import it.unibo.mvc.api.DrawNumberView;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 /**
  * Application entry-point.
@@ -24,10 +26,22 @@ public final class LaunchApp {
      * @throws IllegalAccessException in case of reflection issues
      * @throws IllegalArgumentException in case of reflection issues
      */
-    public static void main(final String... args) {
+    public static void main(final String... args) throws Exception{
         final var model = new DrawNumberImpl();
         final DrawNumberController app = new DrawNumberControllerImpl(model);
-        app.addView(new DrawNumberSwingView());
-        app.addView(new DrawNumberViewImpl());
+        /*app.addView(new DrawNumberSwingView());
+        app.addView(new DrawNumberViewImpl());*/
+
+        for(final var middleClassName : List.of("Swing", "")){
+            final Class<?> classes = Class.forName("it.unibo.mvc.view.DrawNumber" + middleClassName + "ViewImpl");
+            for(int i=0; i<3; i++){
+                final var viewToAttach = classes.getConstructor().newInstance();
+                try{
+                    app.addView((DrawNumberView)viewToAttach);
+                }catch(IllegalStateException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
     }
 }
