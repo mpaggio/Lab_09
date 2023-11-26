@@ -77,7 +77,7 @@ public final class SimpleGUIWithFileChooser {
                     controller.setCurrentFile(newCurrentFile);
                     textField.setText(newCurrentFile.getPath());
                 }
-                else if(result == JFileChooser.CANCEL_OPTION){
+                else if(result != JFileChooser.CANCEL_OPTION){
                     JOptionPane.showMessageDialog(null, result, "Error occurred", JOptionPane.ERROR_MESSAGE);
                 }
             }
