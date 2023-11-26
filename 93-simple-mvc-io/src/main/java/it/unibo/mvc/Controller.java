@@ -15,7 +15,7 @@ public class Controller {
     private File currentFile = new File(HOME + SEPARATOR + DEFAULT_FILE_NAME);
 
     public void setCurrentFile(final File inputFile){
-        if(inputFile.exists()){
+        if(inputFile.getParentFile().exists()){
             this.currentFile = inputFile;
         }
         else{
